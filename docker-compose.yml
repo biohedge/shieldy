@@ -11,6 +11,11 @@ services:
       MONGO_INITDB_DATABASE: shieldy
     volumes:
       - "./dbdata:/data/db"
+    healthcheck:
+      test: echo 'db.stats().ok' | mongo localhost:27017/shieldy --quiet
+      interval: 5s
+      timeout: 5s
+      retries: 12
   app:
     image: tg-bot-penetrator
     build:
@@ -21,4 +26,4 @@ services:
       MONGO: mongodb://db:27017/shieldy
     depends_on:
       db:
-        condition: service_started
+        condition: service_healthy
