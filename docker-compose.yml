@@ -1,0 +1,26 @@
+---
+version: "2.1"
+
+services:
+  db:
+    image: mongo:4.2.0-bionic
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_INITDB_ROOT_PASSWORD}"
+      MONGO_INITDB_DATABASE: shieldy
+    volumes:
+      - "./dbdata:/data/db"
+  nginx:
+
+  app:
+    image: tg-bot-penetrator
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      TOKEN: "${TOKEN}"
+      MONGO: mongodb://db:27017/shieldy
+    depends_on:
+      db:
+        condition: service_started
