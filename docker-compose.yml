@@ -11,8 +11,6 @@ services:
       MONGO_INITDB_DATABASE: shieldy
     volumes:
       - "./dbdata:/data/db"
-  nginx:
-
   app:
     image: tg-bot-penetrator
     build:
