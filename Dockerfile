@@ -1,4 +1,4 @@
-FROM 10.16.3-alpine
+FROM node:10.16.3-alpine
 
 WORKDIR /server
 COPY . /server
