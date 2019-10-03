@@ -4,7 +4,6 @@ version: "2.1"
 services:
   db:
     image: mongo:4.2.0-bionic
-    restart: always
     volumes:
       - "./dbdata:/data/db"
     healthcheck:
@@ -14,6 +13,7 @@ services:
       retries: 12
   app:
     image: tg-bot-penetrator
+    restart: always
     build:
       context: .
       dockerfile: Dockerfile
